@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    container_name: testing-db
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "--password=password"
+        ]
+      timeout: 5s
+      retries: 10
+  app:
+    container_name: pyhton-mysql-app
+    links:
+      - "db"
+    depends_on:
+      db:
+        condition: service_healthy
+    build: ./
