@@ -10,7 +10,8 @@ mydb = mysql.connector.connect(
   user=user,
   password=password
 )
-
+ping = mydb.is_connected()
+print(ping)
 mycursor = mydb.cursor()
 
 mycursor.execute("SHOW DATABASES")
