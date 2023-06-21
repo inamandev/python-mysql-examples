@@ -21,3 +21,10 @@ client = db.cursor()
 # create new database if does not exist
 if not helper.check_database_exist("persons", client):
   helper.create_database(client, "persons")
+
+# selecting database to work with
+client.execute("USE persons")
+
+# create new table if does not exist
+if not helper.check_table_exist(client, "persons"):
+  helper.create_persons_table(client)
