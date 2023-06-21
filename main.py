@@ -33,4 +33,3 @@ if not helper.check_if_records_exist(client, "persons"):
   helper.insert_initial_records(client, "persons")
   db.commit
   print("{} records inserted successfully".format(client.rowcount))
-  print(helper.check_if_records_exist(client, "persons"))
