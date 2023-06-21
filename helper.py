@@ -34,3 +34,26 @@ def check_table_exist(client, table = "my_table"):
 def create_persons_table(client):
   print("create new table persons")
   client.execute("CREATE TABLE persons (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), age INT)")
+
+def check_if_records_exist(client, table):
+  print("check if any records exist in table "+ table)
+  exist = False
+  client.execute("SELECT count(id) AS total FROM " + table)
+  count = client.fetchall()
+  print("{} records exist in table {}".format(count, table))
+  if count[0][0] > 0:
+    print("{} records exist in table {}".format(count[0][0], table))
+    exist = True
+
+  return exist
+
+def insert_initial_records(client, table):
+  print("inserting initial records to table " + table)
+  sql = "INSERT INTO " + table + " (name, address, age) VALUES (%s, %s, %s)"
+  data = [
+    ("Ramesh", "Address 1", 13),
+    ("Amy", "Address 2", 14),
+    ("Peter", "Address 3", 28),
+    ("Rani","Address 4", 43)
+  ]
+  client.executemany(sql, data)

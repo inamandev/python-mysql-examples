@@ -28,3 +28,9 @@ client.execute("USE persons")
 # create new table if does not exist
 if not helper.check_table_exist(client, "persons"):
   helper.create_persons_table(client)
+
+if not helper.check_if_records_exist(client, "persons"):
+  helper.insert_initial_records(client, "persons")
+  db.commit
+  print("{} records inserted successfully".format(client.rowcount))
+  print(helper.check_if_records_exist(client, "persons"))
