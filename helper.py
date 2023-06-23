@@ -61,3 +61,9 @@ def insert_initial_records(client, table):
 def select_all_existing_records(client, table):
   client.execute("SELECT * FROM " + table)
   return client.fetchall()
+
+def select_one(client, table, id):
+  sql = "SELECT * FROM "+ table+" WHERE id = %s"
+  data = (id,)
+  client.execute(sql, data)
+  return client.fetchone()

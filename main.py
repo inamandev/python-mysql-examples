@@ -35,8 +35,11 @@ if not helper.check_if_records_exist(client, "persons"):
   db.commit
   print("{} records inserted successfully".format(client.rowcount))
 
-#select records from existing records
+# select records from existing records
 print("below are all records in persons table")
 for row in helper.select_all_existing_records(client, "persons"):
   print("Id: {}, Name: {}, Address: {}, Age: {}".format(row["id"], row["name"],row["address"],row["age"]))
 
+# select one specific record from table
+person = helper.select_one(client, "persons", 3)
+print("Name of the record is {} and age is {}".format(person["name"], person["age"]))
